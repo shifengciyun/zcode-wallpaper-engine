@@ -1,0 +1,4 @@
+node_modules/
+patch/prebuilt/
+*.log
+*.png

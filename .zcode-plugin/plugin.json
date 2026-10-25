@@ -1,0 +1,43 @@
+{
+  "name": "zcode-wallpaper-engine",
+  "version": "0.5.6",
+  "description": "Wallpapers for ZCode: manage the Windows desktop wallpaper AND paint a wallpaper behind the ZCode chat UI (DSH-style, via an optional app.asar patch with backup/restore). Scans local Wallpaper Engine workshop content, static/live set, random, Bing daily, gallery picker. Adapted from the DSH plugin dsh-plugin-wallpaper-engine (MIT).",
+  "author": {
+    "name": "shifengciyun"
+  },
+  "skills": "./skills",
+  "commands": "./commands",
+  "userConfig": {
+    "defaultWorkshopId": {
+      "type": "string",
+      "title": "默认壁纸（Wallpaper Engine 工坊项目 ID）",
+      "description": "在 Wallpaper Engine 创意工坊内容里选一个作为默认壁纸；agent 收到“换成默认壁纸”时使用。留空表示不固定。",
+      "default": ""
+    },
+    "customImage": {
+      "type": "file",
+      "title": "或选择本地图片作为默认壁纸",
+      "description": "点击选择本机任意图片；填写后优先于工坊项目 ID。",
+      "default": ""
+    },
+    "defaultStyle": {
+      "type": "string",
+      "title": "默认填充方式",
+      "description": "cover=裁剪铺满（推荐）、fit=完整显示留黑边、stretch=拉伸、original=原图直出。",
+      "default": "cover"
+    },
+    "maxRating": {
+      "type": "string",
+      "title": "内容分级上限",
+      "description": "Everyone / Mature / Questionable；画廊与随机换壁纸时按此过滤。",
+      "default": "Mature"
+    },
+    "gallerySize": {
+      "type": "number",
+      "title": "画廊数量",
+      "description": "可视化画廊一次显示的缩略图张数（建议 12-36）。",
+      "default": 24
+    }
+  }
+}
+

@@ -1,0 +1,141 @@
+/* ================= v5: 壁纸引擎 panel (hardened geometry + fixed dark glass) ================= */
+.zwp-fab {
+  position: fixed !important; right: 14px !important; bottom: 14px !important; z-index: 2147483000 !important;
+  width: 38px !important; height: 38px !important; border-radius: 12px !important;
+  border: 1px solid rgba(255,255,255,0.14) !important;
+  background: rgba(16,18,26,0.78) !important;
+  backdrop-filter: blur(14px);
+  color: #ececf2 !important; font-size: 17px !important; line-height: 1 !important;
+  cursor: pointer !important; -webkit-app-region: no-drag !important;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35) !important;
+}
+.zwp-fab:hover { background: rgba(30,34,48,0.9) !important; }
+
+.zwp-panel {
+  position: fixed !important; right: 14px !important; bottom: 60px !important; z-index: 2147483000 !important;
+  width: 680px !important; max-width: calc(100vw - 28px) !important;
+  height: 640px !important; max-height: calc(100vh - 90px) !important;
+  display: flex !important; flex-direction: column !important; gap: 8px !important; padding: 12px !important;
+  border-radius: 16px !important; border: 1px solid rgba(255,255,255,0.1) !important;
+  background: rgba(13,15,22,0.82) !important;
+  backdrop-filter: blur(24px) saturate(1.2);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.45) !important;
+  color: #ececf2 !important; color-scheme: dark;
+  opacity: 0; transform: translateY(8px); pointer-events: none;
+  transition: opacity .16s ease, transform .16s ease;
+  -webkit-app-region: no-drag !important;
+  font-family: inherit;
+}
+.zwp-panel.zwp-open { opacity: 1 !important; transform: none !important; pointer-events: auto !important; }
+
+.zwp-head { display: flex; align-items: flex-start; justify-content: space-between; }
+.zwp-head-l { min-width: 0; }
+.zwp-title { font-size: 16px; font-weight: 600; color: #f2f3f7 !important; display: flex; align-items: center; gap: 8px; }
+.zwp-ver { font-size: 10px; font-weight: 500; color: #67DCE7; border: 1px solid rgba(103,220,231,0.4); border-radius: 5px; padding: 0 5px; line-height: 15px; }
+.zwp-sub { font-size: 12px; color: #9aa0ae !important; margin-top: 2px; }
+.zwp-icon-btn {
+  border: none !important; background: transparent !important; color: #9aa0ae !important;
+  font-size: 14px !important; cursor: pointer !important; padding: 4px 6px !important; border-radius: 8px !important;
+}
+.zwp-icon-btn:hover { color: #ececf2 !important; background: rgba(255,255,255,0.08) !important; }
+
+.zwp-toolbar { display: flex !important; gap: 8px !important; align-items: center !important; flex-wrap: wrap !important; }
+.zwp-seg { display: flex !important; border: 1px solid rgba(255,255,255,0.12) !important; border-radius: 9px !important; overflow: hidden !important; }
+.zwp-seg-btn {
+  border: none !important; background: transparent !important; color: #9aa0ae !important;
+  padding: 5px 10px !important; font-size: 12px !important; cursor: pointer !important;
+}
+.zwp-seg-btn.zwp-on { background: #67DCE7 !important; color: #06272b !important; font-weight: 600; }
+.zwp-search, .zwp-select {
+  padding: 5px 9px !important; font-size: 12px !important;
+  border: 1px solid rgba(255,255,255,0.14) !important; border-radius: 9px !important;
+  background: rgba(255,255,255,0.07) !important; color: #ececf2 !important; outline: none !important;
+  font-family: inherit !important;
+}
+.zwp-search { flex: 1 1 120px !important; min-width: 100px !important; }
+.zwp-search::placeholder { color: #767c88 !important; }
+.zwp-select option { background: #16181f; color: #ececf2; }
+
+.zwp-grid {
+  flex: 1 1 0 !important; min-height: 0 !important; overflow-y: auto !important;
+  display: grid !important; gap: 8px !important; padding-right: 2px !important;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)) !important;
+  grid-auto-rows: 94px !important;
+  align-content: start !important;
+}
+.zwp-grid::-webkit-scrollbar { width: 8px; }
+.zwp-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.14); border-radius: 4px; }
+
+.zwp-card {
+  position: relative !important; height: 94px !important; border-radius: 10px !important; overflow: hidden !important;
+  cursor: pointer !important; border: 1px solid rgba(255,255,255,0.1) !important;
+  background: #14161d !important; display: block !important;
+  transition: border-color .12s ease, transform .12s ease;
+}
+.zwp-card:hover { border-color: #67DCE7 !important; transform: translateY(-1px); }
+.zwp-card.zwp-busy { opacity: 0.55 !important; pointer-events: none !important; }
+.zwp-thumb {
+  position: absolute !important; inset: 0 !important;
+  width: 100% !important; height: 100% !important;
+  object-fit: cover !important; display: block !important;
+}
+.zwp-thumb-none {
+  position: absolute !important; inset: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important;
+  color: #767c88 !important; font-size: 12px !important;
+}
+.zwp-badges { position: absolute !important; top: 5px !important; left: 5px !important; right: 5px !important; display: flex !important; gap: 4px !important; flex-wrap: wrap; }
+.zwp-badge {
+  font-size: 10px !important; line-height: 14px !important; padding: 0 5px !important; border-radius: 5px !important;
+  background: rgba(8,10,14,0.66) !important; color: #e8eaf0 !important; backdrop-filter: blur(4px);
+}
+.zwp-badge-r { background: rgba(196,54,54,0.82) !important; color: #fff !important; }
+.zwp-card-name {
+  position: absolute !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+  padding: 16px 7px 5px !important; font-size: 11px !important; line-height: 14px !important; color: #fff !important;
+  white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important;
+  background: linear-gradient(transparent, rgba(0,0,0,0.78)) !important;
+}
+.zwp-card-off {
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  flex-direction: column !important; gap: 4px !important;
+  background: rgba(255,255,255,0.05) !important;
+}
+.zwp-card-off-x { font-size: 18px !important; color: #9aa0ae !important; }
+.zwp-card-off .zwp-card-name { position: static !important; background: none !important; color: #9aa0ae !important; padding: 0 !important; text-align: center !important; }
+
+.zwp-pager { display: flex !important; gap: 8px !important; align-items: center !important; justify-content: center !important; }
+.zwp-pager-info { font-size: 12px !important; color: #9aa0ae !important; min-width: 64px !important; text-align: center !important; }
+.zwp-pager button {
+  border: 1px solid rgba(255,255,255,0.12) !important; background: rgba(255,255,255,0.06) !important;
+  color: #ececf2 !important; font-size: 12px !important; border-radius: 8px !important;
+  padding: 3px 12px !important; cursor: pointer !important; font-family: inherit !important;
+}
+.zwp-pager button:disabled { opacity: 0.35 !important; cursor: default !important; }
+.zwp-pager button:not(:disabled):hover { border-color: #67DCE7 !important; }
+
+.zwp-foot { display: flex !important; gap: 8px !important; }
+.zwp-act-btn {
+  flex: 1 1 0 !important; padding: 6px 0 !important; font-size: 12px !important; border-radius: 9px !important; cursor: pointer !important;
+  border: 1px solid rgba(255,255,255,0.12) !important; background: rgba(255,255,255,0.06) !important;
+  color: #ececf2 !important; font-family: inherit !important;
+}
+.zwp-act-btn:hover { border-color: #67DCE7 !important; }
+.zwp-act-btn:disabled { opacity: 0.5 !important; cursor: default !important; }
+.zwp-hint { grid-column: 1 / -1 !important; padding: 30px 10px !important; text-align: center !important; color: #9aa0ae !important; font-size: 13px !important; }
+
+.zwp-toast {
+  position: fixed !important; left: 50% !important; bottom: 84px !important; transform: translateX(-50%) translateY(6px) !important;
+  z-index: 2147483600 !important; padding: 8px 16px !important; border-radius: 10px !important; font-size: 13px !important;
+  background: rgba(16,18,26,0.92) !important; color: #ececf2 !important;
+  border: 1px solid rgba(255,255,255,0.14) !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4) !important; opacity: 0 !important; transition: all .2s ease !important;
+  -webkit-app-region: no-drag !important; max-width: 70vw;
+}
+.zwp-toast.zwp-show { opacity: 1 !important; transform: translateX(-50%) translateY(0) !important; }
+.zwp-toast-err { border-color: #e5484d !important; color: #ff8f92 !important; }
+
+/* live background layer */
+.zwp-live {
+  position: fixed !important; inset: 0 !important; width: 100vw !important; height: 100vh !important;
+  object-fit: contain !important; z-index: -1 !important; pointer-events: none !important;
+}
